@@ -8,7 +8,20 @@
 </head>
 <body class="bg-light">
 
-  <div class="container py-5">
+  <!-- 🔊 Background Music and Toggle Button -->
+  <div class="text-center py-3">
+    <audio id="bgMusic" loop>
+      <source src="{{ url_for('static', filename='music/background.mp3') }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+
+    <button id="musicToggle" class="btn btn-outline-primary btn-sm">
+      🔊 Play Music
+    </button>
+  </div>
+
+  <!-- 📦 Main Content -->
+  <div class="container pb-5">
     <h2 class="text-center mb-4">Upload and View Your Videos</h2>
 
     <!-- Upload Form -->
@@ -45,6 +58,25 @@
       <p class="text-muted">No videos uploaded yet.</p>
     {% endif %}
   </div>
+
+  <!-- 🎛️ Music Control Script -->
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+
+    let isPlaying = false;
+
+    musicToggle.addEventListener("click", () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicToggle.innerText = "🔊 Play Music";
+      } else {
+        bgMusic.play();
+        musicToggle.innerText = "🔇 Pause Music";
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
 
 </body>
 </html>
